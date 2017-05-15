@@ -20,7 +20,7 @@ function drawCrosshairs(rows) {
     };
 
     var jsonData = $.ajax({
-        url: "getData.php",
+        url: "getdata.php",
         dataType: "json",
         async: false
     }).responseText;

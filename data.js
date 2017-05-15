@@ -25,9 +25,9 @@ function drawCrossHairs() {
         async: false
     }).responseText;
 
-    // Some magic to convert JSON string values to integers for the charts
+    // Some magic to convert JSON string values to numbers for the charts
     var dataArray = JSON.parse(jsonData, function (k, v) {
-        return (typeof v === "object" || isNaN(v)) ? v : parseInt(v, 10);
+        return (typeof v === "object" || isNaN(v)) ? v : parseFloat(v);
     });
 
     if (dataArray.length > 0) {

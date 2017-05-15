@@ -30,6 +30,12 @@ function drawCrossHairs() {
         return (typeof v === "object" || isNaN(v)) ? v : parseInt(v, 10);
     });
 
+    if (dataArray.length > 0) {
+        $("button").show();
+    } else {
+        $("button").hide();
+    }
+
     // Drawing the table
     var tableData = new google.visualization.DataTable();
     tableData.addColumn('number', 'Temperature');
@@ -40,7 +46,7 @@ function drawCrossHairs() {
 
     // Trim the array to last five values
     if (dataArray.length > 5) {
-        dataArray = dataArray.slice(0,5);
+        dataArray = dataArray.slice(0, 5);
     }
 
     // Reverse the array
@@ -67,4 +73,19 @@ function drawCrossHairs() {
 
     setTimeout(drawCrossHairs, 5000);
 
+}
+
+function cleanup() {
+    var jsonData = $.ajax({
+        url: "cleanup.php",
+        dataType: "json",
+        async: false
+    }).responseText;
+    jsonData = JSON.parse(jsonData);
+    if (jsonData.message == 'success') {
+        alert("Cleanup Done");
+        $("button").hide();
+    } else {
+        alert("Some error occured.");
+    }
 }

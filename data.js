@@ -1,7 +1,7 @@
 google.charts.load('current', {packages: ['corechart', 'line', 'table']});
-google.charts.setOnLoadCallback(drawCrosshairs);
+google.charts.setOnLoadCallback(drawCrossHairs);
 
-function drawCrosshairs(rows) {
+function drawCrossHairs() {
 
     var options = {
         width: 700,
@@ -20,12 +20,12 @@ function drawCrosshairs(rows) {
     };
 
     var jsonData = $.ajax({
-        url: "getData.php",
+        url: "getdata.php",
         dataType: "json",
         async: false
     }).responseText;
 
-    // Some majic to convert JSON string values to integers for the charts
+    // Some magic to convert JSON string values to integers for the charts
     var dataArray = JSON.parse(jsonData, function (k, v) {
         return (typeof v === "object" || isNaN(v)) ? v : parseInt(v, 10);
     });
@@ -65,7 +65,6 @@ function drawCrosshairs(rows) {
     chart.draw(data, options);
     chart.setSelection([{row: 38, column: 1}]);
 
-    setTimeout(drawCrosshairs, 5000);
+    setTimeout(drawCrossHairs, 5000);
 
 }
-
